@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesan Malam</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #FF9A8B, #FF6A88, #FF99AC);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 80%;
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            margin-bottom: 1rem;
+            color: #FF6A88;
+            font-weight: 600;
+        }
+        #pesan {
+            font-size: 1.2rem;
+            margin: 2rem 0;
+            min-height: 3em;
+            line-height: 1.6;
+        }
+        button {
+            background-color: #FF6A88;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            margin-top: 1rem;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 106, 136, 0.4);
+        }
+        button:hover {
+            background-color: #FF9A8B;
+            transform: translateY(-2px);
+        }
+        .watermark {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            color: #FF6A88;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+        }
+        .decoration {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        .heart { top: 10px; left: 10px; }
+        .star { top: 10px; right: 10px; }
+        .flower { bottom: 10px; left: 10px; }
+        .butterfly { bottom: 10px; right: 10px; }
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .sparkle {
+            position: absolute;
+            background: #FFF;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkle 1.5s infinite;
+        }
+        @keyframes sparkle {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="watermark">DEWA DEVELOPER</div>
+        <div class="decoration heart">❤️</div>
+        <div class="decoration star">⭐</div>
+        <div class="decoration flower">🌸</div>
+        <div class="decoration butterfly">🦋</div>
+        <div class="sparkles"></div>
+        <h1>Pesan Untukmu <span id="emoji">✨</span></h1>
+        <p id="pesan">Hai cantik, mau baca pesan dariku?</p>
+        <button onclick="nextPesan()">Klik ini cantik</button>
+    </div>
+
+    <script>
+        const pesanList = [
+            "Selamat malam! Semoga harimu menyenangkan.",
+            "Senang bisa bertemu dan mengenalmu hari ini.",
+            "Sudah waktunya istirahat. Jangan lupa tidur ya!",
+            "Semangat untuk besok! Kamu pasti bisa menghadapi hari dengan baik.",
+            "Terima kasih sudah membaca pesan-pesan ini. Selamat malam!"
+        ];
+
+        let currentPesan = -1;
+        const pesanElem = document.getElementById('pesan');
+        const buttonElem = document.querySelector('button');
+
+        function nextPesan() {
+            currentPesan++;
+            if (currentPesan < pesanList.length) {
+                pesanElem.textContent = pesanList[currentPesan];
+                buttonElem.textContent = "Lanjut";
+                if (currentPesan === pesanList.length - 1) {
+                    buttonElem.textContent = 'Selesai';
+                }
+            } else {
+                pesanElem.textContent = "See you cantik";
+                buttonElem.style.display = 'none';
+            }
+        }
+
+        // Membuat efek sparkle
+        const sparklesContainer = document.querySelector('.sparkles');
+        for (let i = 0; i < 50; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.style.left = `${Math.random() * 100}%`;
+            sparkle.style.top = `${Math.random() * 100}%`;
+            sparkle.style.animationDelay = `${Math.random() * 1.5}s`;
+            sparklesContainer.appendChild(sparkle);
+        }
+    </script>
+</body>
+</html>
